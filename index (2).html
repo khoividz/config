@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Hack FF</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        body {
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #000000, #434343);
+            background-size: 400% 400%;
+            animation: gradient-shift 10s infinite ease-in-out;
+            color: #fff;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        body.light-mode {
+            background: linear-gradient(135deg, #ffffff, #dcdcdc);
+            color: #000;
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        header {
+            background-color: rgba(255, 69, 0, 0.8);
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 3px solid #ff4500;
+            box-shadow: 0 4px 8px rgba(255, 69, 0, 0.6);
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.9);
+            max-width: 400px;
+            margin: 20px auto;
+            opacity: 0;
+            transition: opacity 1s ease, transform 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav.light-mode {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        nav.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin-bottom: 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            padding: 15px 20px;
+            background: rgba(75, 75, 75, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav ul li a.active {
+            background-color: rgba(255, 69, 0, 0.9);
+            box-shadow: 0 10px 20px rgba(255, 69, 0, 0.8);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        nav ul li.menu-title {
+            background: rgba(255, 69, 0, 0.8);
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 10px rgba(255, 69, 0, 0.8);
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ff4500;
+        }
+
+        .login-container input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            background-color: #222;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .login-container input:focus {
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.8);
+            outline: none;
+        }
+
+        .login-container button {
+            padding: 10px;
+            background-color: #ff4500;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: #ff6347;
+        }
+
+        #toast {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff4500;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .language-selector {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .language-selector select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .mode-switch {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .mode-switch button {
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+            background: #ff4500;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .mode-switch button:hover {
+            background: #ff6347;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="typing">Menu Hack FF</h1>
+    </header>
+    <div class="language-selector">
+        <label for="language">Chọn ngôn ngữ:</label>
+        <select id="language" onchange="changeLanguage()">
+            <option value="vi">Tiếng Việt</option>
+            <option value="en">English</option>
+            <option value="ko">한국어</option>
+            <option value="zh">中文</option>
+        </select>
+    </div>
+    <div class="mode-switch">
+        <button onclick="toggleMode()">Chuyển đổi chế độ</button>
+    </div>
+    <div class="login-container" id="login-container">
+        <h2>Đăng nhập</h2>
+        <form onsubmit="handleLogin(event)">
+            <input type="text" id="username" name="username" placeholder="Nhập tài khoản" required>
+            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+            <button type="submit">Đăng nhập</button>
+        </form>
+    </div>
+    <nav id="menu">
+        <ul>
+            <li class="menu-title">Chức năng Hack</li>
+            <li><a href="#autoheadshot" onclick="toggleFeature(this)">AUTOHEADSHOT</a></li>
+            <li><a href="#aimlock" onclick="toggleFeature(this)">AIMLOCK</a></li>
+            <li><a href="#aimbot" onclick="toggleFeature(this)">AIMBOT</a></li>
+            <li><a href="#aimfov" onclick="toggleFeature(this)">AIMFOV</a></li>
+            <li><a href="#antiband" onclick="toggleFeature(this)">ANTIBAND</a></li>
+        </ul>
+    </nav>
+    <div id="toast"></div>
+    <script>
+        let selectedFeatures = [];
+        let isDarkMode = true;
+
+        function toggleFeature(element) {
+            const featureName = element.textContent.trim();
+            if (element.classList.contains('active')) {
+                element.classList.remove('active');
+                selectedFeatures = selectedFeatures.filter(f => f !== featureName);
+            } else {
+                element.classList.add('active');
+                selectedFeatures.push(featureName);
+            }
+            const selectedMessage = selectedFeatures.length > 0
+                ? `Bạn đã chọn các chức năng: ${selectedFeatures.join(', ')}`
+                : 'Bạn chưa chọn chức năng nào';
+            showToast(selectedMessage, true);
+        }
+
+        function showToast(message, success = true) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.backgroundColor = success ? '#4CAF50' : '#ff4500';
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        function changeLanguage() {
+            const language = document.getElementById('language').value;
+            const translations = {
+                vi: 'Bạn đã chọn các chức năng:',
+                en: 'You have selected the features:',
+                ko: '선택한 기능은 다음과 같습니다:',
+                zh: '您选择的功能是:'
+            };
+            const selectedMessage = selectedFeatures.length > 0
+                ? `${translations[language]} ${selectedFeatures.join(', ')}`
+                : translations[language].split(':')[0];
+            showToast(selectedMessage, true);
+        }
+
+        function toggleMode() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('light-mode', !isDarkMode);
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('light-mode', !isDarkMode);
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === 'admin' && password === 'khoivi') {
+                const loginContainer = document.getElementById('login-container');
+                loginContainer.style.display = 'none';
+                const menu = document.getElementById('menu');
+                menu.style.display = 'block';
+                menu.classList.add('fade-in');
+                showToast('Đăng nhập thành công!', true);
+            } else {
+                showToast('Sai tài khoản hoặc mật khẩu!', false);
+            }
+        }
+    </script>
+</body>
+</html>
